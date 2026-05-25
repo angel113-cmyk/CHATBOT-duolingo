@@ -1,0 +1,12 @@
+{
+  "name": "duolingo-chatbot-base",
+  "version": "1.0.0",
+  "description": "Base para un chatbot con diseño tipo Duolingo.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
