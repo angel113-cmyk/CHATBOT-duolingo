@@ -1,0 +1,16 @@
+# Ignore build artifacts
+/bin/
+/obj/
+
+# Ignore local database files
+DuolingoMVC/duolingo.db
+DuolingoMVC/duolingo.db-shm
+DuolingoMVC/duolingo.db-wal
+
+# Visual Studio / Rider
+.vs/
+
+# Logs and local files
+*.log
+*.user
+*.suo
