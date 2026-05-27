@@ -1,0 +1,44 @@
+@model DuolingoMVC.Models.ChatViewModel
+@{
+    ViewData["Title"] = "Chat de idioma";
+}
+
+<div class="chat-page">
+    <div class="chat-header">
+        <div>
+            <p class="section-tag">Chatbot</p>
+            <h1>Selecciona tu nivel</h1>
+            <p class="section-description">Elige A1, A2 o B1 para que el bot use vocabulario adecuado.</p>
+        </div>
+        <div class="chat-level-buttons">
+            @foreach (var level in Model.LevelOptions)
+            {
+                <form asp-action="SetLevel" asp-controller="Home" method="post">
+                    <input type="hidden" name="level" value="@level" />
+                    <button type="submit" class="btn btn-outline-primary">@level</button>
+                </form>
+            }
+        </div>
+    </div>
+
+    <div class="chat-window">
+        @foreach (var message in Model.Messages)
+        {
+            var cssClass = message.Sender == "User" ? "user" : "bot";
+            <article class="chat-message @cssClass">
+                <p>@message.Text</p>
+                <span>@message.Sender</span>
+            </article>
+        }
+    </div>
+
+    <form asp-action="Chat" asp-controller="Home" method="post" class="chat-input-row">
+        <input type="text" name="userInput" class="form-control" value="" placeholder="Escribe aquí... (También puedes usar /nivel A2)" autocomplete="off" />
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.CurrentLevel))
+    {
+        <p class="section-description">Nivel actual: <strong>@Model.CurrentLevel</strong>. Puedes cambiarlo en cualquier momento con <code>/nivel A1</code>, <code>/nivel A2</code> o <code>/nivel B1</code>.</p>
+    }
+</div>
