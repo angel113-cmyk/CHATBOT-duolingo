@@ -1,0 +1,53 @@
+@model DuolingoMVC.Models.UserProfile
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<div class="page-section profile-section">
+    <div class="section-header">
+        <div>
+            <p class="section-tag">Mi perfil</p>
+            <h2>Hola, @Model.Name</h2>
+            <p class="section-description">Aquí puedes ver tu progreso, tu nivel y tu idioma objetivo.</p>
+        </div>
+        <a class="btn btn-primary btn-lg" asp-action="Index">Ir al Dashboard</a>
+    </div>
+
+    <div class="profile-grid">
+        <section class="profile-card">
+            <h3>Información personal</h3>
+            <dl>
+                <dt>Nombre</dt>
+                <dd>@Model.Name</dd>
+                <dt>Email</dt>
+                <dd>@Model.Email</dd>
+                <dt>Idioma nativo</dt>
+                <dd>@Model.NativeLanguage</dd>
+                <dt>Idioma a aprender</dt>
+                <dd>@Model.TargetLanguage</dd>
+            </dl>
+        </section>
+
+        <section class="profile-card profile-stats">
+            <h3>Estadísticas</h3>
+            <div class="stats-list">
+                <div>
+                    <span class="stat-number">@Model.Points</span>
+                    <span class="stat-label">Puntos</span>
+                </div>
+                <div>
+                    <span class="stat-number">@Model.Level</span>
+                    <span class="stat-label">Nivel</span>
+                </div>
+                <div>
+                    <span class="stat-number">@Model.XP</span>
+                    <span class="stat-label">XP</span>
+                </div>
+                <div>
+                    <span class="stat-number">@Model.StreakDays</span>
+                    <span class="stat-label">Racha</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

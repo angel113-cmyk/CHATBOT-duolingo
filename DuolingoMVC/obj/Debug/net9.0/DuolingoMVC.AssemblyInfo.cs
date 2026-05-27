@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DuolingoMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1d930b51bb675f4f0b7236fa8a723e532082ebd5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a97814b437774de405bf0cb3315bf28ec0ef8ed")]
 [assembly: System.Reflection.AssemblyProductAttribute("DuolingoMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DuolingoMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,45 @@
+@model DuolingoMVC.Models.HomeDashboardViewModel
+@{
+    ViewData["Title"] = "Lecciones";
+}
+
+<div class="page-section">
+    <div class="section-header">
+        <div>
+            <p class="section-tag">Tu camino</p>
+            <h2>Lecciones disponibles</h2>
+            <p class="section-description">Completa cada lección para ganar puntos, subir de nivel y mantener tu racha.</p>
+        </div>
+        <a class="btn btn-primary btn-lg" asp-action="Index">Ir al Dashboard</a>
+    </div>
+
+    <div class="lesson-grid">
+        @foreach (var lesson in Model.Lessons)
+        {
+            var stateClass = lesson.Status == "Bloqueado"
+                ? "locked"
+                : lesson.Status == "En progreso"
+                    ? "active"
+                    : "completed";
+
+            <article class="lesson-card @stateClass">
+                <div class="lesson-card-top">
+                    <div>
+                        <span class="lesson-badge">@lesson.Status</span>
+                        <h3>@lesson.Title</h3>
+                        <p>@lesson.Subtitle</p>
+                    </div>
+                    <span class="lesson-xp">+@lesson.XPReward XP</span>
+                </div>
+
+                <div class="lesson-progress-bar">
+                    <div class="lesson-progress-fill" style="width:@lesson.ProgressPercent%"></div>
+                </div>
+                <div class="lesson-card-footer">
+                    <span>@lesson.ProgressPercent % completado</span>
+                    <button class="btn btn-outline-primary" disabled="@(lesson.Status == "Bloqueado")">@((lesson.Status == "Bloqueado") ? "Próximo" : "Continuar")</button>
+                </div>
+            </article>
+        }
+    </div>
+</div>

@@ -1,8 +1,81 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DuolingoMVC.Models.HomeDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="dashboard-page">
+    <section class="hero-card">
+        <div class="hero-text">
+            <span class="hero-tag">Bienvenido de vuelta</span>
+            <h1>¡Hola, @Model.User.Name!</h1>
+            <p>Continúa tu aprendizaje de @Model.User.TargetLanguage con lecciones diarias, retos y recompensas.</p>
+            <div class="hero-buttons">
+                <a class="btn btn-primary btn-lg" asp-action="Lessons">Ir a Lecciones</a>
+                <a class="btn btn-outline-light btn-lg" asp-action="Profile">Mi Perfil</a>
+            </div>
+        </div>
+        <div class="hero-metrics">
+            <div class="metric-card accent">
+                <h3>@Model.User.Points</h3>
+                <p>Puntos</p>
+            </div>
+            <div class="metric-card">
+                <h3>@Model.User.Level</h3>
+                <p>Nivel</p>
+            </div>
+            <div class="metric-card">
+                <h3>@Model.User.StreakDays <span class="streak-emoji">🔥</span></h3>
+                <p>Racha</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="progress-card">
+        <div class="progress-header">
+            <div>
+                <h2>Progreso general</h2>
+                <p>Completa lecciones para desbloquear nuevas etapas y ganar XP.</p>
+            </div>
+            <span class="progress-value">@Model.CompletionPercent %</span>
+        </div>
+        <div class="progress-bar bg-light rounded-pill">
+            <div class="progress-fill rounded-pill" style="width:@Model.CompletionPercent%"></div>
+        </div>
+    </section>
+
+    <section class="lessons-preview">
+        <div class="section-header">
+            <div>
+                <p class="section-tag">Lecciones</p>
+                <h2>Hoy en tu rutina</h2>
+            </div>
+            <a class="btn btn-secondary" asp-action="Lessons">Ver todas</a>
+        </div>
+
+        <div class="lesson-grid">
+            @foreach (var lesson in Model.Lessons)
+            {
+                var stateClass = lesson.Status == "Bloqueado"
+                    ? "locked"
+                    : lesson.Status == "En progreso"
+                        ? "active"
+                        : "completed";
+
+                <article class="lesson-card @stateClass">
+                    <div class="lesson-card-top">
+                        <span class="lesson-status">@lesson.Status</span>
+                        <h3>@lesson.Title</h3>
+                        <p>@lesson.Subtitle</p>
+                    </div>
+                    <div class="lesson-progress-bar">
+                        <div class="lesson-progress-fill" style="width:@lesson.ProgressPercent%"></div>
+                    </div>
+                    <div class="lesson-footer">
+                        <span>@lesson.ProgressPercent % completado</span>
+                        <span class="lesson-xp">+@lesson.XPReward XP</span>
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
 </div>

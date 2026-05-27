@@ -1,0 +1,43 @@
+@model DuolingoMVC.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Crear cuenta";
+}
+
+<div class="auth-page">
+    <h1>Crear cuenta</h1>
+    <p>Regístrate para guardar tu progreso y desbloquear nuevas lecciones.</p>
+
+    <form asp-action="Register" asp-controller="Home" method="post" class="auth-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" placeholder="Tu nombre" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" placeholder="nombre@ejemplo.com" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-control" placeholder="******" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-4">
+            <label asp-for="ConfirmPassword" class="form-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" placeholder="Repite la contraseña" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Crear cuenta</button>
+    </form>
+
+    <div class="auth-footer">
+        ¿Ya tienes cuenta? <a asp-action="Login" asp-controller="Home">Inicia sesión</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
