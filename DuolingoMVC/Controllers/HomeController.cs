@@ -4,6 +4,7 @@ using DuolingoMVC.Data;
 using DuolingoMVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BCrypt.Net;
 
 namespace DuolingoMVC.Controllers;
 
@@ -240,8 +241,8 @@ public class HomeController : Controller
             return View(model);
         }
 
-        var user = _db.UserProfiles.SingleOrDefault(u => u.Email == model.Email && u.Password == model.Password);
-        if (user == null)
+        var user = _db.UserProfiles.SingleOrDefault(u => u.Email == model.Email);
+        if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
         {
             ModelState.AddModelError(string.Empty, "Correo o contraseña incorrecta.");
             return View(model);
@@ -280,7 +281,7 @@ public class HomeController : Controller
         {
             Name = model.Name,
             Email = model.Email,
-            Password = model.Password,
+            Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
             StreakDays = 1,
             Points = 0,
             Level = 1,
