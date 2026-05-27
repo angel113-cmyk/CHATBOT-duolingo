@@ -7,51 +7,40 @@
     <title>@ViewData["Title"] - Duolingo Academy</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p1CmX6m9YdQmQjvZ1N2q3Kz9V6g1QeX2q2Xo6nJgqG1V7Jq1Zc1w5J6k9GvQ1Yz1Q6v1l6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DuolingoMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header class="site-header">
-        <nav class="navbar navbar-expand-sm navbar-light px-4">
-            <a class="navbar-brand fw-bold text-success" asp-area="" asp-controller="Home" asp-action="Index">Duolingo Academy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                @{ var isLoggedIn = Context.Session.GetInt32("UserProfileId") != null; }
-                <ul class="navbar-nav ms-auto align-items-center">
-                    @if (isLoggedIn)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Lessons">Lecciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Chat">Chat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Profile">Perfil</a>
-                        </li>
-                        <li class="nav-item ms-3">
-                            <a class="nav-link btn btn-outline-primary rounded-pill px-3" asp-area="" asp-controller="Home" asp-action="Logout">Cerrar sesión</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item ms-3">
-                            <a class="nav-link btn btn-outline-primary rounded-pill px-3" asp-area="" asp-controller="Home" asp-action="Login">Iniciar sesión</a>
-                        </li>
-                        <li class="nav-item ms-2">
-                            <a class="nav-link btn btn-primary rounded-pill px-3 text-white" asp-area="" asp-controller="Home" asp-action="Register">Crear cuenta</a>
-                        </li>
-                    }
-                </ul>
-            </div>
+    @{ var isLoggedIn = Context.Session.GetInt32("UserProfileId") != null; }
+    <aside class="duo-sidebar">
+        <div class="duo-brand">
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <span class="duo-logo">duo</span>
+                <span class="duo-title">Duolingo Academy</span>
+            </a>
+        </div>
+        <nav class="duo-nav">
+            <ul>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link"><i class="fa-solid fa-house"></i><span>Aprender</span></a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Lessons" class="nav-link"><i class="fa-solid fa-book"></i><span>Lecciones</span></a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Chat" class="nav-link"><i class="fa-solid fa-comments"></i><span>Chat</span></a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Profile" class="nav-link"><i class="fa-solid fa-user"></i><span>Perfil</span></a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link"><i class="fa-solid fa-shield-halved"></i><span>Privacidad</span></a></li>
+            </ul>
         </nav>
-    </header>
+        <div class="duo-actions">
+            @if (isLoggedIn)
+            {
+                <a class="btn btn-ghost" asp-area="" asp-controller="Home" asp-action="Logout">Cerrar sesión</a>
+            }
+            else
+            {
+                <a class="btn btn-ghost" asp-area="" asp-controller="Home" asp-action="Login">Iniciar sesión</a>
+                <a class="btn btn-primary duo-cta" asp-area="" asp-controller="Home" asp-action="Register">Crear cuenta</a>
+            }
+        </div>
+    </aside>
 
     <div class="site-container">
         <main role="main" class="pb-3">
