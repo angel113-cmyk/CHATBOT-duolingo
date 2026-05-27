@@ -3,9 +3,9 @@
 /obj/
 
 # Ignore local database files
-DuolingoMVC/duolingo.db
-DuolingoMVC/duolingo.db-shm
-DuolingoMVC/duolingo.db-wal
+duolingo.db
+duolingo.db-shm
+duolingo.db-wal
 
 # Visual Studio / Rider
 .vs/

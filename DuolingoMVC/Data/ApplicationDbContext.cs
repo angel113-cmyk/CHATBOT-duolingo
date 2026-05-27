@@ -23,7 +23,7 @@ public class ApplicationDbContext : DbContext
                 Id = 1,
                 Name = "Ari",
                 Email = "ari@example.com",
-                Password = "Demo123!",
+                Password = BCrypt.Net.BCrypt.HashPassword("Demo123!"),
                 StreakDays = 7,
                 Points = 1250,
                 Level = 4,
